@@ -7,21 +7,15 @@ import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
 import store from './store/config';
 import { useDeleteDataMutation } from './services/crud';
 
-function App() {
+function Example() {
   const { post } = useGetDataQuery("Query", {
     selectFromResult: ({ data }) => ({
-      post: data?.find((post) => post.id === "2")
+      post: data?.find((post) => post.id === "3")
     })
   });
 
   const { data, error, isLoading } = useGetDataQuery("Query");
-  console.log(data, post)
-  /* 
-    const [deleteData] = useDeleteDataMutation();
-  
-    useEffect(() => {
-      deleteData("7");
-    }, []); */
+console.log(data, post);
 
   return (
     <div className="App">
@@ -43,4 +37,4 @@ function App() {
   );
 }
 
-export default App;
+export default Example;
