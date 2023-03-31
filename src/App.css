@@ -1,38 +1,40 @@
 .App {
-  text-align: center;
+  padding: 80px 160px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App .addNote {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.App .addNote .input {
+  width: 100%;
+  margin-right: 24px;
+}
+
+.button {
+  width: 150px;
+  background: green;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.ant-card-head {
+  background-color: black !important;
+  color: white !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ant-card-body {
+  font-size: 16px;
+}
+
+.card-extra{
+  display: flex;
+}
+
+.card-extra .ant-btn {
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

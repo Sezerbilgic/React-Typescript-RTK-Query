@@ -1,44 +1,21 @@
-import React, { useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { queryApi, useGetDataQuery } from './services/apiQuery';
-import { baseQueryApi } from './services/exampleBaseQuery';
-import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
-import store from './store/config';
-import { useDeleteDataMutation } from './services/crud';
+import React from 'react';
+import AddNote from './components/AddNote';
+import "./App.css";
+import NoteList from './components/NoteList';
+import { useGetNotesByIdMutation } from './services/crud';
+import EditNote from './components/EditNote';
 
 function App() {
-  const { post } = useGetDataQuery("Query", {
-    selectFromResult: ({ data }) => ({
-      post: data?.find((post) => post.id === "2")
-    })
-  });
-
-  const { data, error, isLoading } = useGetDataQuery("Query");
-  console.log(data, post)
-  /* 
-    const [deleteData] = useDeleteDataMutation();
-  
-    useEffect(() => {
-      deleteData("7");
-    }, []); */
+  const [getNotesById, result] = useGetNotesByIdMutation();
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        result.data
+          ? <EditNote editData={result.data} />
+          : <AddNote />
+      }
+      <NoteList editFunction={getNotesById} />
     </div>
   );
 }

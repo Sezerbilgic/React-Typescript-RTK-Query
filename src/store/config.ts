@@ -1,20 +1,15 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { queryApi } from "../services/apiQuery";
-import { crudApi } from "../services/crud";
-import { baseQueryApi } from "../services/exampleBaseQuery";
+import { noteApi } from "../services/crud";
+
 
 const store = configureStore({
   reducer: {
-    [queryApi.reducerPath]: queryApi.reducer,
-    [baseQueryApi.reducerPath]: baseQueryApi.reducer,
-    [crudApi.reducerPath]: crudApi.reducer
+    [noteApi.reducerPath]: noteApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
-      queryApi.middleware,
-      baseQueryApi.middleware,
-      crudApi.middleware
+      noteApi.middleware
     ]),
 });
 

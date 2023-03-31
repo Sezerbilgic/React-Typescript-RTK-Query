@@ -1,10 +1,9 @@
-export type Query = {
+export type Note = {
   id: string,
-  name: string,
-  surname: string,
-  salary: number
+  header: string,
+  description: string
 }
 
 export interface IStore {
-  queryApi: Query
+  noteApi: Note
 }

@@ -1,42 +1,56 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { stringify } from "querystring";
-import { Query } from "../types/types";
+import { Note } from "../types/types";
 
-export const crudApi = createApi({
-  reducerPath: "crudApi",
+export const noteApi = createApi({
+  reducerPath: "noteApi",
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://6422c231001cb9fc202f0794.mockapi.io/api/v1/'
   }),
-  endpoints: (builder) => ({
-    get: builder.query({
-      query: () => "Query"
+  tagTypes: ["Note"],
+  endpoints: builder => ({
+    getNotes: builder.query<Note[], void>({
+      query: () => "Note",
+      providesTags: ["Note"]
     }),
-    post: builder.mutation({
-      query: (body) => ({
-        url: "/Query",
-        method: "post",
-        body
+    getNotesById: builder.mutation<Note, string>({
+      query: (id) => ({
+        url: `Note/${id}`,
+        method: "get"
       })
     }),
-    put: builder.mutation({
+    postNote: builder.mutation({
+      query: (payload) => ({
+        url: "/Note",
+        method: "post",
+        body: payload,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }),
+      invalidatesTags: ["Note"]
+    }),
+    putNote: builder.mutation({
       query: ({ id, body }) => ({
-        url: `Query/${id}`,
+        url: `Note/${id}`,
         method: "put",
         body
-      })
+      }),
+      invalidatesTags: ["Note"]
     }),
-    deleteData: builder.mutation({
-      query: (id) => ({
-        url: `Query/${id}`,
+    deleteNote: builder.mutation({
+      query: (id: string) => ({
+        url: `Note/${id}`,
         method: "delete",
-      })
+      }),
+      invalidatesTags: ["Note"]
     })
   })
 });
 
 export const {
-  useGetQuery,
-  usePostMutation,
-  usePutMutation,
-  useDeleteDataMutation
-} = crudApi;
+  useGetNotesQuery,
+  useGetNotesByIdMutation,
+  usePostNoteMutation,
+  usePutNoteMutation,
+  useDeleteNoteMutation
+} = noteApi;
