@@ -1,6 +1,7 @@
 import { Button, Input } from "antd";
 import React from "react";
-import { usePostNoteMutation } from "../services/crud";
+import { useSelector } from "react-redux";
+import { noteApi, usePostNoteMutation } from "../services/crud";
 import { Note } from "../types/types";
 
 const AddNote = () => {

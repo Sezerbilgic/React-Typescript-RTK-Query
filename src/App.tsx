@@ -8,8 +8,8 @@ import EditNote from './components/EditNote';
 function App() {
   const [getNotesById, result] = useGetNotesByIdMutation({
     fixedCacheKey: "shared-get-note"
-  }),
-    { data, isLoading } = useGetNotesQuery();
+  })
+    // { data, isLoading } = useGetNotesQuery();
 
   return (
     <div className="App">

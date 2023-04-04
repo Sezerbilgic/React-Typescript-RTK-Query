@@ -1,7 +1,8 @@
 import { Button, Card, Col, Row } from "antd";
 import React, { useEffect } from "react";
-import { useDeleteNoteMutation, useGetNotesByIdMutation, useGetNotesQuery } from "../services/crud";
+import { noteApi, useDeleteNoteMutation, useGetNotesByIdMutation, useGetNotesQuery } from "../services/crud";
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { useSelector } from "react-redux";
 
 const NoteList = () => {
   const
@@ -10,7 +11,8 @@ const NoteList = () => {
     [getNotesById] = useGetNotesByIdMutation({
       fixedCacheKey: "shared-get-note"
     });
-
+  /*   const { data: selectorData } = useSelector(noteApi.endpoints.getNotes.select());
+    console.log(selectorData); */
   return (
     <Row gutter={[16, 16]}>
       {
@@ -19,7 +21,7 @@ const NoteList = () => {
             <Card title={x.header} extra={
               <div className="card-extra">
                 <Button onClick={() => getNotesById(x.id)} style={{ marginRight: "8px" }}><EditOutlined /></Button>
-                <Button onClick={() => deleteNote("15")} ><DeleteOutlined /></Button>
+                <Button onClick={() => deleteNote(x.id)} ><DeleteOutlined /></Button>
               </div>
             } >
               <p>{x.description}</p>
